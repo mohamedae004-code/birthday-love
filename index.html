@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday My Love ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 40px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-width: 420px;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .countdown {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .tap {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: float 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body onclick="enableSound()">
+
+  <div class="card">
+    <h1>For My Beautiful Love 💕</h1>
+
+    <p>
+      Every second brings me closer  
+      to the day that celebrates **you** 🌸  
+      You mean everything to me ❤️
+    </p>
+
+    <div class="countdown" id="countdown"></div>
+    <div class="tap">Tap anywhere to hear my heart 🎶</div>
+  </div>
+
+  <!-- 🎶 Romantic Music -->
+  <audio id="music" autoplay loop muted>
+    <source src="romantic-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    /* 🎂 COUNTDOWN */
+    const birthday = new Date("March 2, 2026 00:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = birthday - now;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = "🎉 Happy Birthday My Love 🎂❤️";
+        return;
+      }
+
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((distance / (1000 * 60)) % 60);
+      const s = Math.floor((distance / 1000) % 60);
+
+      countdownEl.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    /* 🎵 MUSIC */
+    const music = document.getElementById("music");
+
+    function enableSound() {
+      music.muted = false;
+      music.play();
+      document.body.onclick = null;
+      document.querySelector(".tap").innerText = "Enjoy our song ❤️";
+    }
+
+    /* ❤️ FLOATING HEARTS */
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 400);
+  </script>
+
+</body>
+</html>
